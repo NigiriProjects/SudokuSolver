@@ -2,12 +2,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class Suduku {
+public class Sudoku {
   int[][] array = new int[9][9];
   File file;
   int[][][] booleanArray = new int[9][9][9];
+  public String string = "Hello";
+  int[][][] possibleSolutions = new int[9][9][9];
 
-  Suduku(File file) throws FileNotFoundException {
+  Sudoku(File file) throws FileNotFoundException {
 
     this.file = file;
     parseFile(file);
@@ -62,7 +64,7 @@ public class Suduku {
     }
     boolean notSolved;
     do {
-        notSolved = false;
+      notSolved = false;
       for (int i = 0; i < 9; i++) {
         for (int k = 0; k < 9; k++) {
           if (array[i][k] == 0) {
@@ -77,6 +79,10 @@ public class Suduku {
                   array[i][k] = l + 1;
                   setRowCol(i, k);
                   setQuad(i, k);
+                } else {
+                  if (booleanArray[l][i][k] != 0) {
+                    possibleSolutions[i][k][l] = l;
+                  }
                 }
               }
             }
@@ -84,18 +90,28 @@ public class Suduku {
         }
       }
     } while (notSolved);
-      }
-  public void printBools(){
-      for (int[][] array : booleanArray) {
-          System.out.println("Bool array");
-
-          for (int i = 0; i < 9; i++) {
-              for (int k = 0; k < 9; k++) {
-                  System.out.print(" " + array[i][k]);
-              }
-              System.out.println();
-          }
-
-      }
   }
+
+  public void printBools() {
+    for (int[][] array : booleanArray) {
+      System.out.println("Bool array");
+
+      for (int i = 0; i < 9; i++) {
+        for (int k = 0; k < 9; k++) {
+          System.out.print(" " + array[i][k]);
+        }
+        System.out.println();
+      }
+
+    }
+  }
+  //public boolean isSolved(){
+
+  //}
+  //public boolean checkRow(int index){
+  //int[] temp = new int[9];
+  //for(int i = 0; i<9; i++){
+  //temp[i] = array[];
+  //}
+  //}
 }
